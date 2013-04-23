@@ -3,15 +3,18 @@ target/*
 .checkstyle
 .pmd*
 
-# Eclipse derived files that should not be committed
-.settings/*
-
 # Compiled files
 .class
 .pyc
 
 # LibreOffice
 ~.lock
+
+# Netbeans
 /nbproject/private/
 /utils/OCDUtils/OCDUtils/nbproject/private/
-/utils/OCDUtils/OCDUtils/build/
+
+
+# Misc
+utils/OCDUtils/OCDUtils/data/
+
