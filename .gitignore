@@ -1,0 +1,11 @@
+# Maven derived files that should not be committed
+target/*
+.checkstyle
+.pmd*
+
+# Eclipse derived files that should not be committed
+.settings/*
+
+# Compiled files
+.class
+.pyc
