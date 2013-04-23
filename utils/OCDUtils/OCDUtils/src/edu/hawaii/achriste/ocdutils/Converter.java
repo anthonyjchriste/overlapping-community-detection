@@ -13,14 +13,20 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- *
- * @author anthony
+ * This class contains methods that convert between GraphML and .pairs files.
+ * @author Anthony Christe
  */
 public class Converter {
+    
+    /**
+     * Converts GraphML files to .pairs files using a streaming parser.
+     * @param graphMlFile The GraphML file being converted.
+     * @param pairsFile The resulting pairs file name.
+     * @param weighted true if the GraphML file is weighted, false otherwise.
+     */
     public static void convertGraphMlToPairs(File graphMlFile, File pairsFile, boolean weighted) {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(pairsFile));
-            Map<Pair, Double> mapping = new HashMap<>();
             SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
             DefaultHandler handler = new GraphMlHandler(out, weighted);
             saxParser.parse(graphMlFile, handler);

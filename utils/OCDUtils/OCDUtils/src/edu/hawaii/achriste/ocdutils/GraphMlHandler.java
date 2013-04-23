@@ -55,24 +55,25 @@ public class GraphMlHandler extends DefaultHandler {
      */
     @Override
     public void startDocument() throws SAXException {
-        
+        System.out.println("Starting");
     }
 
     /**
-     * Scans all tags searching for edges and data within the edges.
-     * @throws SAXException 
+     * Scans all tags specifically searching for edges and data within the edges.
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         int source;
         int target;
      
+        // Entering an edge-tag
         if(qName.equals("edge")) {
             this.inEdge = true;
             source = (int) Double.parseDouble(attributes.getValue("source"));
             target = (int) Double.parseDouble(attributes.getValue("target"));
             this.edgePair = new Pair<>(source, target);
             
+            // If this isn't weighted, write out the results not instead of waiting for the weight
             if(!this.weighted) {
                 try {
                     out.append(this.edgePair.toString () + "\n");
@@ -84,16 +85,25 @@ public class GraphMlHandler extends DefaultHandler {
             }
         }
         
+        // Entering a data tag which should be inside of the edge tag
         if(qName.equals("data") && attributes.getValue("key").equals("weight") && this.inEdge) {
             this.inData = true;
         }
     }
     
+    /**
+     * Reads the characters between the tags.
+     * @param chars Characters between tags.
+     * @param start Starting location of the characters.
+     * @param length Length of the characters.
+     */
     @Override
     public void characters(char[] chars, int start, int length) {
-        double weight;
         String line;
+        
+        // Make sure we're only recording characters between <edge><data>...</data></edge>
         if(inEdge && inData && weighted) {
+            // Creates a line with the format vertex vertex weight.
             line = String.format("%s %s\n", edgePair.toString(), new String(chars, start, length));
             
             try {
@@ -106,6 +116,11 @@ public class GraphMlHandler extends DefaultHandler {
         }
     }
 
+    /**
+     * This method fires at every end tag.
+     * 
+     * This is used to determine when we've reached the end of a data or edge tag.
+     */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if(qName.equals("data") && this.inData) {
@@ -116,11 +131,15 @@ public class GraphMlHandler extends DefaultHandler {
         }
     }
     
+    /**
+     * Reached the end of the XML document, flush and close streams.
+     */
     @Override
     public void endDocument() throws SAXException {
         try {
             out.flush();
             out.close();
+            System.out.println("Done");
         }
         catch (IOException e) {
             System.err.println("Problem closing output stream");

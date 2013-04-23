@@ -16,36 +16,55 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class contains methods for sorting communities.
+ * @author Anthony Christe
+ */
 public class Sorter {
     
+    /**
+     * Sorts communities by size, largest to smallest.
+     * @param clustersFile The clusters file to read in.
+     * @param sortedClustersFile The output file.
+     */
     public static void sortCommunitiesByReverseSize(File clustersFile, File sortedClustersFile) {
         String[] pairs;
         List<Set<String>> list = new LinkedList<>();
         
         try {
             Scanner in = new Scanner(clustersFile);
+            
+            // Store each line as a set of pairs
+            System.out.println("Reading file");
             while(in.hasNextLine()) {
                 pairs = in.nextLine().split(" ");
-                list.add(new HashSet(Arrays.asList(pairs)));
+                list.add(new HashSet<String> (Arrays.asList(pairs)));
             }
             
-            Comparator<Set<String>> comparator = new Comparator() {
+            // Comparator on size of sets to sort in reverse order
+            Comparator<Set<String>> comparator = new Comparator<Set<String>>() {
                 @Override
-                public int compare(Object setA, Object setB) {
-                    return Integer.valueOf(((Set) setB).size()).compareTo(((Set) setA).size());
+                public int compare(Set<String> setA, Set<String> setB) {
+                    return Integer.valueOf(setB.size()).compareTo(setA.size());
                 }
             };
             
+            System.out.println("Sorting");
+            
+            // Sort the set
             Collections.sort(list, comparator);
             
             BufferedWriter out = new BufferedWriter(new FileWriter(sortedClustersFile));
             String line;
+            System.out.println("Writing file");
             for(Set<String> set : list) {
                 line = set.toString();
+                // Remove extra [ and ] from set.toString
                 line = line.substring(1, line.length() - 1);
                 out.append(line + "\n");
             }
             out.close();
+            System.out.println("Done");
         }
         catch(FileNotFoundException e) {
             System.err.println("Could not find file " + clustersFile);
