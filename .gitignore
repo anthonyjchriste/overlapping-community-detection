@@ -12,10 +12,13 @@ target/*
 
 # Netbeans
 /nbproject/private/
-/utils/OCDUtils/OCDUtils/nbproject/private/
-utils/OCDUtils/OCDUtils/build/
+utils/OCDUtils/nbproject/private/
+utils/OCDUtils/build/
 
 # Misc
 utils/OCDUtils/OCDUtils/data/
+utils/OCDUtils/data/
 
-/utils/OCDUtils/OCDUtils/dist/
+/utils/OCDUtils/dist/
+/utils/OCDUtils/build/
+/utils/OCDUtils/dist/
