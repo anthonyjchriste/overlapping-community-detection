@@ -16,9 +16,8 @@ utils/OCDUtils/nbproject/private/
 utils/OCDUtils/build/
 
 # Misc
-utils/OCDUtils/OCDUtils/data/
-utils/OCDUtils/data/
+/OCDUtils/data/
+/OCDUtils/dist/
+/OCDUtils/build/
 
-/utils/OCDUtils/dist/
-/utils/OCDUtils/build/
-/utils/OCDUtils/dist/
+/OverlappingCommunityDetection/nbproject/private/
