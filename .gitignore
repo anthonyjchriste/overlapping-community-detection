@@ -9,3 +9,6 @@ target/*
 # Compiled files
 .class
 .pyc
+
+# LibreOffice
+~.lock
