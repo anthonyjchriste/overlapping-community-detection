@@ -21,3 +21,6 @@ utils/OCDUtils/build/
 /OCDUtils/build/
 
 /OverlappingCommunityDetection/nbproject/private/
+/OverlappingCommunityDetection/dist/
+/OverlappingCommunityDetection/build/
+/OCDUtils/nbproject/private/
