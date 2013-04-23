@@ -171,14 +171,14 @@ public class COSimilarity {
                             neighborsJ = new TreeSet<>(neighbors.get(n_j));
 
                             for (Integer x : intersection(neighborsI, neighborsJ)) {
-								System.out.println("mult " + x  + "," + n_i + " * " + x + "," + n_j);
+								//System.out.println("mult " + x  + "," + n_i + " * " + x + "," + n_j);
                                 dotProduct += edgeToWeight.get(new Pair(x, n_i)) * edgeToWeight.get(new Pair(x, n_j));
                             }
 							
-							System.out.println("DP:" + dotProduct);
+							//System.out.println("DP:" + dotProduct);
 							
                             curJacc = dotProduct / (n2a_sqrd.get(n_i) + n2a_sqrd.get(n_j) - dotProduct);
-                            System.out.println("n_i=" + n_i + " n_j=" + n_j + " " + n2a_sqrd.get(n_i) + " " + n2a_sqrd.get(n_j) + " " + ((n2a_sqrd.get(n_i) + n2a_sqrd.get(n_j))));
+                            //System.out.println("n_i=" + n_i + " n_j=" + n_j + " " + n2a_sqrd.get(n_i) + " " + n2a_sqrd.get(n_j) + " " + ((n2a_sqrd.get(n_i) + n2a_sqrd.get(n_j))));
                             dotProduct = 0;
                         // Calculated non-weighted similarities
                         } else {

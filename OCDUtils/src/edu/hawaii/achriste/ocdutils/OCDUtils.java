@@ -11,8 +11,8 @@ import java.util.TreeMap;
  * @author Anthony Christe
  */
 public class OCDUtils {
-    private static final int DATA_DIR = 0;
-    private static final int DATA_SET = 1;
+    private static final int DATA_DIR = 1;
+    private static final int DATA_SET = 0;
     private static final int UTILITY = 2;
     private static final int FIRST_ARG = 3;
     
@@ -147,7 +147,7 @@ public class OCDUtils {
      * Displays the basic usage for this program.
      */
     private static void usage() {
-        System.out.println("usage:\n\tjava -jar OCDUtils.jar [data dir] [data set] [utility]");
+        System.out.println("usage:\n\tjava -jar OCDUtils.jar [data set] [data dir] [utility]");
         System.out.println("full info:\n\tOCDUtils help");
         System.out.println("utility info:\n\tOCDUtils help [utility]");
         System.out.println("available utilities:");
@@ -178,7 +178,7 @@ public class OCDUtils {
      * Display help for all utilities.
      */
     private static void help() {
-        System.out.println("usage:\n\tjava -jar OCDUtils.jar [data dir] [data set] [utility]");
+        System.out.println("usage:\n\tjava -jar OCDUtils.jar [data set] [data dir] [utility]");
         for (String utility : usageMap.keySet()) {
             System.out.println("\nutility: " + utility);
             System.out.println(usageMap.get(utility));
