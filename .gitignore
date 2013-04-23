@@ -12,3 +12,9 @@ target/*
 
 # LibreOffice
 ~.lock
+/utils/OCDUtils/OCDUtils/nbproject/private/
+/utils/OCDUtils/OCDUtils/build/
+
+# Misc
+utils/OCDUtils/OCDUtils/data/
+

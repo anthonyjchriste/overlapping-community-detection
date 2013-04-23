@@ -48,4 +48,9 @@ public class Pair <F, S> {
         
         return this.first.equals(pair.getFirst()) && this.second.equals(pair.getSecond());
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.first.toString(), this.second.toString());
+    }
 }
