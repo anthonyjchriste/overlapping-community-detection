@@ -5,8 +5,7 @@ and algorithms that allows users to find overlapping community structures
 in networks. 
 
 ## Binary Downloads
-[OverlappingCommunityDetection-1.0](https://github.com/anthonyjchriste/overlapping-community-detection/blob/master/dist/OverlappingCommunityDetection-1.0.jar?raw=true)<br />
-[OCDUtils-1.0](https://github.com/anthonyjchriste/overlapping-community-detection/blob/master/dist/OCDUtils-1.0.jar?raw=true)
+[OCD-1.0.tar.gz](https://github.com/anthonyjchriste/overlapping-community-detection/blob/master/dist/OCD-1.0.tar.gz?raw=true)
 
 ## User Manual
 For more information on how to use O.C.D., please see the [User Guide](https://github.com/anthonyjchriste/overlapping-community-detection/wiki/User-Guide).
