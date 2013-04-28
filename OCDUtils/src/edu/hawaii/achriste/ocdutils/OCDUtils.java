@@ -1,8 +1,12 @@
 package edu.hawaii.achriste.ocdutils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jdom2.JDOMException;
 
 /**
  * This class provides a front end to handle the command line arguments
@@ -108,11 +112,22 @@ public class OCDUtils {
     private static void convert(String convertType, boolean weighted) {
         File graphMlFile = new File(joinURL(dataDir, dataSet, "graphml"));
         File pairsFile = new File(joinURL(dataDir, dataSet, "pairs"));
-
+        File clustersFile = new File(joinURL(dataDir, dataSet, "clusters.sorted.nodups"));
+        File outputGraphMlFile = new File(joinURL(dataDir, dataSet, "clusters.graphml"));
+        
         switch (convertType) {
             // GraphML to .pairs
             case "g2p":
                 Converter.convertGraphMlToPairs(graphMlFile, pairsFile, weighted);
+                break;
+            case "c2g":
+                try {
+                    Converter.convertClustersToGraphML(graphMlFile, clustersFile, outputGraphMlFile);
+                } catch (JDOMException ex) {
+                    Logger.getLogger(OCDUtils.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(OCDUtils.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             default:
                 System.err.println("Unknown conversion type.");
@@ -193,17 +208,17 @@ public class OCDUtils {
     private static TreeMap<String, String> getUsageMap() {
         TreeMap<String, String> usageMap = new TreeMap<>();
         
-        usageMap.put("convert", "\tConvert between unweighted GraphML and .pairs files\n"
-                + "Prerequisits:\n\tvalid GraphML file\n"
-                + "Arguments (1-of):\n\tg2p (GraphML to .pairs)\n\tp2g (.pairs to GraphML");
+        usageMap.put("convert", "\tConvert between unweighted GraphML, .pairs, and .clusters files\n"
+                + "Prerequisits:\n\tvalid GraphML file\n\tAnd a valid .clusters.sorted.nodups file (for c2g)\n"
+                + "Arguments (1-of):\n\tg2p (GraphML to .pairs)\n\tc2g (.clusters to GraphML)");
         
         usageMap.put("dups", "\tRemoves duplicate edge-pairs from sorted clusters file\n"
                 + "Prerequisits:\n\tsorted clusters file (.clusters.sorted)\n"
                 + "Arguments:\n\tnone");
         
-        usageMap.put("convertw", "\tConvert between weighted GraphML and .pairs files\n"
-                + "Prerequisits:\n\tvalid GraphML file\n"
-                + "Arguments (1-of):\n\tg2p (GraphML to .pairs)\n\tp2g (.pairs to GraphML)");
+        usageMap.put("convertw", "\tConvert between weighted GraphML, .pairs, and .clusters files\n"
+                + "Prerequisits:\n\tvalid GraphML file\n\tAnd a valid .clusters.sorted.nodup file (for c2g)\n"
+                + "Arguments (1-of):\n\tg2p (GraphML to .pairs)\n\tc2g (.clusters to GraphML)");
         
         usageMap.put("sort","\tSorts a clusters file by community size, largest to smallest\n"
                 + "Prerequisits:\n\tvalid .clusters file\n"
