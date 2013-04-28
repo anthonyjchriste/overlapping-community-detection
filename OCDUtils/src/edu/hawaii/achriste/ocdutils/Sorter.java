@@ -13,8 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class contains methods for sorting communities.
@@ -38,7 +36,7 @@ public class Sorter {
             System.out.println("Reading file");
             while(in.hasNextLine()) {
                 pairs = in.nextLine().split(" ");
-                list.add(new HashSet<String> (Arrays.asList(pairs)));
+                list.add(new HashSet<> (Arrays.asList(pairs)));
             }
             
             // Comparator on size of sets to sort in reverse order
@@ -61,6 +59,9 @@ public class Sorter {
                 line = set.toString();
                 // Remove extra [ and ] from set.toString
                 line = line.substring(1, line.length() - 1);
+                
+                //Remove extra commas
+                line = line.replaceAll(", ", " ");
                 out.append(line + "\n");
             }
             out.close();
