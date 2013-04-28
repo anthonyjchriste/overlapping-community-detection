@@ -209,18 +209,24 @@ public class Converter {
                     if (id.contains(".")) {
                         id = id.split("\\.")[0];
                     }
-                    data.addContent(Integer.toString(nodeToCommunities.get(id).size()));
-                    e.addContent(0, data);
+                    
+                    if(nodeToCommunities.containsKey(id)) {
+                        data.addContent(Integer.toString(nodeToCommunities.get(id).size()));
+                        e.addContent(0, data);
+                    }
 
                     // Handle data commlist
                     String comms;
                     data = new Element("data", ns);
                     data.setAttribute("key", "commlist");
-                    comms = nodeToCommunities.get(id).toString();
-                    comms = comms.substring(1, comms.length() - 1);
-                    comms = comms.replaceAll(" ", "");
-                    data.addContent(comms);
-                    e.addContent(1, data);
+                    
+                    if (nodeToCommunities.containsKey(id)) {
+                        comms = nodeToCommunities.get(id).toString();
+                        comms = comms.substring(1, comms.length() - 1);
+                        comms = comms.replaceAll(" ", "");
+                        data.addContent(comms);
+                        e.addContent(1, data);
+                    }
                     lastIndex = graph.indexOf(e);
                 }
             }
