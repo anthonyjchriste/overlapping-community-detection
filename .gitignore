@@ -25,4 +25,4 @@ utils/OCDUtils/build/
 /OverlappingCommunityDetection/build/
 /OCDUtils/nbproject/private/
 /dist/*.jar
-
+/dist/lib
