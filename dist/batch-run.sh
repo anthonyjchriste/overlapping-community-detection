@@ -2,7 +2,7 @@
 
 DATASET="$1"
 DATADIR="$2"
-VERSION=1.2
+VERSION=1.3
 UTIL_BASE="OCDUtils-$VERSION.jar $DATASET $DATADIR"
 OCD_BASE="OverlappingCommunityDetection-$VERSION.jar $DATASET $DATADIR"
 TIME="/usr/bin/time -v"
@@ -33,7 +33,7 @@ do
     echo "Removing duplicates"
     $JAR_CMD $UTIL_BASE dups
     
-    echo "Converting .ckusters to GraphML"
+    echo "Converting .clusters to GraphML"
     $JAR_CMD $UTIL_BASE convertw c2g
     
     echo "Cleaning up data"
