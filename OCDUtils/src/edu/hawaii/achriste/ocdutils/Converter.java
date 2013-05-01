@@ -150,6 +150,13 @@ public class Converter {
         key.setAttribute("for", "node");
         key.setAttribute("id", "commlist");
         root.addContent(2, key);
+        
+        key = new Element("key", ns);
+        key.setAttribute("attr.name", "COMM");
+        key.setAttribute("attr.type", "string");
+        key.setAttribute("for", "node");
+        key.setAttribute("id", "COMM");
+        root.addContent(2, key);
     }
     
     private static void addCommunityNodes(Document doc, Map<Integer, Set<String>> communityToNodes) {
@@ -296,7 +303,15 @@ public class Converter {
                     if(target.contains(".")) {
                         target = target.split("\\.")[0];
                     }
-                    ecomm = edgeToCommunity.get(target + "," + source).toString();
+                    
+                    // TODO: This might be a bit ofa hack. But was getting
+                    // a NPE otherwise.
+                    if(edgeToCommunity.get(target + "," + source) == null) {
+                        ecomm = edgeToCommunity.get(source + "," + target).toString();
+                    }
+                    else {
+                        ecomm = edgeToCommunity.get(target + "," + source).toString();
+                    }
                     
                     data.addContent(ecomm);
                     e.addContent(1, data);
